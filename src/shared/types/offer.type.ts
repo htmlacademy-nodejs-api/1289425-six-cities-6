@@ -1,11 +1,12 @@
 import { Category } from './category.type.js';
-import { User } from './user.type.js';
+import {Coord} from "./coord.type.js";
 
 export type Offer = {
   title: string;
   description: string;
-  date: Date;
+  date: string;
   town:string;
+  previewImage:string,
   photos: string[];
   flagPremium:boolean;
   flagFavourite:boolean;
@@ -15,7 +16,8 @@ export type Offer = {
   guests:number;
   price: number;
   categories: Category[];//Удобства.
-  user: User;
+  author: string;
   numberOfComments:number,//Количество комментариев. Рассчитывается автоматически;
-  coords:string;
+  coords:Coord;
 }
+
