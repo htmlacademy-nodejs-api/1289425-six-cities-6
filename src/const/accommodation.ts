@@ -1,1 +1,1 @@
-export const Accommodation:string[]=['apartment', 'house', 'room', 'hotel'];
+export const Accommodation:string[] = ['apartment', 'house', 'room', 'hotel'];
