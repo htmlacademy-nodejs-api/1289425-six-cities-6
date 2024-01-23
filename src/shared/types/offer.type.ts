@@ -1,6 +1,5 @@
 import {Category} from './category.type.js';
-import {Coord} from "./coord.type.js";
-
+import {Coord} from './coord.type.js';
 export type Offer = {
   title: string;
   description: string;

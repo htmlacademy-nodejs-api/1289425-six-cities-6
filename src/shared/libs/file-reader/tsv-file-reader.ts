@@ -1,7 +1,7 @@
 import {FileReader} from './file-reader.interface.ts';
 import {readFileSync} from 'node:fs';
 import {Offer} from '../../types/index.ts';
-import {BooleanString} from "../../../const/boolean_string.js";
+import {BooleanString} from '../../../const/boolean_string.js';
 
 export class TSVFileReader implements FileReader {
   private rawData = '';
@@ -24,24 +24,24 @@ export class TSVFileReader implements FileReader {
       .split('\n')
       .filter((row) => row.trim().length > 0)
       .map((line) => line.split('\t'))
-      .map(([title,
-              description,
-              date,
-              town,
-              previewImage,
-              photos,
-              flagPremium,
-              flagFavourite,
-              rate,
-              typeOfHouse,
-              rooms,
-              guests,
-              price,
-              categories,
-              author,
-              numberOfComments,
-              coords
-            ]) => ({
+      .map(([
+        title,
+        description,
+        date,
+        town,
+        previewImage,
+        photos,
+        flagPremium,
+        flagFavourite,
+        rate,
+        typeOfHouse,
+        rooms,
+        guests,
+        price,
+        categories,
+        author,
+        numberOfComments,
+        coords]) => ({
         title,
         description,
         date,

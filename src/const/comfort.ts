@@ -6,6 +6,6 @@ export const Comforts = [
   'Towels',
   'Washer',
   'Fridge',
-]
+];
 
 
