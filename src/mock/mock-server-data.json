@@ -1,0 +1,83 @@
+{
+  "api": {
+    "titles": [
+      "Студия в Париже",
+      "Студия в японском стиле в Кельне",
+      "Домик в у озеры в окрестностях Берлина",
+      "Просторная вилла c видом на море",
+      "Отель в центре Амстердама"
+    ],
+    "descriptions": [
+      "Центр, близко к метро и достопримечательностям.",
+      "Для любителей японского минимализма",
+      "Тихое уединение",
+      "Вилла с видом на залив",
+      "Отель в центре Амстердама"
+    ],
+    "photos": [
+      "https://phonoteka.org/uploads/posts/2021-11/1637247424_34-phonoteka-org-p-fon-dlya-rendera-interera-krasivo-35.jpg",
+      "https://www.st-montaj.ru/wp-content/uploads/2022/05/dizajn-kvartiry-v-stile-minimalizm-foto-osobennosti-proektov-94ae039.jpg",
+      "https://sportishka.com/uploads/posts/2022-03/1647916496_57-sportishka-com-p-derevyannii-domik-na-beregu-ozera-turizm-k-58.jpg",
+      "https://pro-dachnikov.com/uploads/posts/2021-10/1633219161_20-p-villi-foto-20.jpg",
+      "https://avatars.mds.yandex.net/get-altay/1595534/2a0000016f37b1ca29f63679c447f3d8ae2f/XXXL"
+    ],
+    "user": [
+      "Mike",
+      "Serge",
+      "Henry",
+      "Mary",
+      "Carl"
+    ]
+  },
+  "types": [
+    "Apartment",
+    "House",
+    "Room",
+    "Hotel"
+  ],
+  "cities": [
+    {
+      "name": "Paris",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499
+      }
+    },
+    {
+      "name": "Cologne",
+      "location": {
+        "latitude": 50.938361,
+        "longitude": 6.959974
+      }
+    },
+    {
+      "name": "Brussels",
+      "location": {
+        "latitude": 50.846557,
+        "longitude":  4.351697
+      }
+    },
+    {
+      "name": "Amsterdam",
+      "location": {
+        "latitude": 52.370216,
+        "longitude":  4.895168
+      }
+    },
+    {
+      "name": "Hamburg",
+      "location": {
+        "latitude": 53.550341,
+        "longitude":  10.000654
+      }
+    },
+    {
+      "name": "Dusseldorf",
+      "location": {
+        "latitude": 51.225402,
+        "longitude": 6.776314
+      }
+    }
+  ]
+}
+

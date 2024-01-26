@@ -15,7 +15,8 @@
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
     "ts": "ts-node",
-    "cli": "node main.cli.ts"
+    "cli": "node main.cli.ts",
+    "json-server": "json-server ./src/mocks/mock-server-data.json"
 
   },
   "devDependencies": {
@@ -26,7 +27,8 @@
     "eslint-config-htmlacademy": "9.1.1",
     "rimraf": "5.0.1",
     "ts-node": "10.9.1",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "json-server": "1.0.0-alpha.21"
   },
   "type": "module",
   "engines": {
