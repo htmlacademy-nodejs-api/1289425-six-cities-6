@@ -14,21 +14,30 @@
       "Вилла с видом на залив",
       "Отель в центре Амстердама"
     ],
-    "photos": [
+    "offerImages": [
       "https://phonoteka.org/uploads/posts/2021-11/1637247424_34-phonoteka-org-p-fon-dlya-rendera-interera-krasivo-35.jpg",
       "https://www.st-montaj.ru/wp-content/uploads/2022/05/dizajn-kvartiry-v-stile-minimalizm-foto-osobennosti-proektov-94ae039.jpg",
       "https://sportishka.com/uploads/posts/2022-03/1647916496_57-sportishka-com-p-derevyannii-domik-na-beregu-ozera-turizm-k-58.jpg",
       "https://pro-dachnikov.com/uploads/posts/2021-10/1633219161_20-p-villi-foto-20.jpg",
       "https://avatars.mds.yandex.net/get-altay/1595534/2a0000016f37b1ca29f63679c447f3d8ae2f/XXXL"
     ],
-    "user": [
+    "users": [
       "Mike",
       "Serge",
       "Henry",
       "Mary",
       "Carl"
-    ]
-  },
+    ],
+    "categories": [
+      "Breakfast",
+      "Air conditioning",
+      "Laptop friendly workspace",
+      "Baby seat",
+      "Towels",
+      "Washer",
+      "Fridge"
+    ],
+
   "types": [
     "Apartment",
     "House",
@@ -79,5 +88,5 @@
       }
     }
   ]
-}
+}}
 
