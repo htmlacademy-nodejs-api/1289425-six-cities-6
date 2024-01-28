@@ -10,15 +10,17 @@
   "main": "main.js",
   "scripts": {
     "start": "npm run build && node ./dist/main.js",
-    "start:dev": "npm run clean && npm run compile",
     "build": "npm run clean && npm run compile",
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
     "clean": "rimraf dist",
     "ts": "ts-node",
-    "tsx": "4.7.0",
+    "tsx": "tsx",
+    "cli:version": "tsx ./src/main.cli.ts --version",
+    "cli:help": "tsx ./src/main.cli.ts",
+    "cli:import": "tsx ./src/main.cli.ts --import ./src/mock/offers.tsv",
     "mock:server": "json-server ./src/mock/mock-server-data.json --port 3123"
-   },
+  },
   "devDependencies": {
     "@types/node": "18.17.17",
     "@typescript-eslint/eslint-plugin": "6.7.0",
@@ -35,6 +37,7 @@
     "npm": ">=8"
   },
   "dependencies": {
-    "chalk": "^5.3.0"
+    "chalk": "^5.3.0",
+    "tsx": "4.7.0"
   }
 }
