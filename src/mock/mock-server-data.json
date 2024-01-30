@@ -21,18 +21,18 @@
       "https://pro-dachnikov.com/uploads/posts/2021-10/1633219161_20-p-villi-foto-20.jpg",
       "https://avatars.mds.yandex.net/get-altay/1595534/2a0000016f37b1ca29f63679c447f3d8ae2f/XXXL"
     ],
-    "photo": [
+    "photos": [
       "photo1.jpg",
       "photo2.jpg",
       "photo3.jpg",
       "photo4.jpg",
       "photo5.jpg"
     ],
-    "isPremium": [
+    "flagPremium": [
       true,
       false
     ],
-    "isFavorite": [
+    "flagFavorite": [
       true,
       false
     ],
@@ -62,9 +62,7 @@
       "Washer",
       "Fridge"
     ],
-
-
-  "cities": [
+  "city": [
     {
       "name": "Paris",
       "location": {

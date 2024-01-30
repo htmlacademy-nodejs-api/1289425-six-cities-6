@@ -13,13 +13,12 @@ export class TSVOfferGenerator implements OfferGenerator {
   constructor(private readonly mockData: MockServerData) {}
 
   public generate(): string {
-    const categories = getRandomItems<string>(this.mockData.categories).join(';');
     const title = getRandomItem<string>(this.mockData.titles);
     const description = getRandomItem<string>(this.mockData.descriptions);
-    const photo = getRandomItem<string>(this.mockData.offerImages);
+    const photo = getRandomItem<string>(this.mockData.photos);
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
     const author = getRandomItem(this.mockData.users);
-
+    const categories = getRandomItems<string>(this.mockData.categories).join(';');
 
     const createdDate = dayjs()
       .subtract(generateRandomValue(FIRST_WEEK_DAY, LAST_WEEK_DAY), 'day')
@@ -31,6 +30,6 @@ export class TSVOfferGenerator implements OfferGenerator {
       title, description, createdDate,
       photo, price, categories,
       firstname
-    ].join('\t');
+    ].join('|');
   }
 }

@@ -28,7 +28,7 @@ export class TSVFileReader implements FileReader {
         title,
         description,
         date,
-        town,
+        city,
         previewImage,
         photos,
         flagPremium,
@@ -40,13 +40,13 @@ export class TSVFileReader implements FileReader {
         price,
         author,
         numberOfComments,
-        coords,
+        location,
         categories
       ]) => ({
         title,
         description,
         date,
-        town,
+        city,
         previewImage,
         photos: photos ? photos.split(',') : [],
         flagPremium: flagPremium === BooleanString.TRUE,
@@ -58,13 +58,12 @@ export class TSVFileReader implements FileReader {
         price: Number.parseInt(price, 10),
         author,
         numberOfComments: Number.parseInt(numberOfComments, 10),
-        coords: {
-          latitude: Number.parseFloat(coords.split(',')[0]),
-          longitude: Number.parseFloat(coords.split(',')[1]),
+        location: {
+          latitude: Number.parseFloat(location.split(',')[0]),
+          longitude: Number.parseFloat(location.split(',')[1]),
         },
         categories: categories.split(',')
           .map((name) => ({name})),
-
       }));
   }
 }

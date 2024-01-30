@@ -1,4 +1,3 @@
-import {Category} from "./category.type.js";
 import {Location} from "./location.type.js";
 import {City} from "./city.type.js";
 
@@ -10,7 +9,7 @@ export type MockServerData = {
   previewImage:string[];
   photos: string[];
   flagPremium: boolean[];
-  flagFavourite: boolean[];
+  flagFavorite: boolean[];
   rate: number[];
   types: string[];//тип размещения
   rooms: number[];
@@ -19,5 +18,5 @@ export type MockServerData = {
   users: string[];//только имя
   numberOfComments:number[];
   locations:Location[];
-  categories: Category[];//удобства
+  categories: string[];//удобства
 };

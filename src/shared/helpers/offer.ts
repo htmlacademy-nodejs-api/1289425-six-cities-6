@@ -1,22 +1,22 @@
-import { ServerOffer} from '../types/index.js';
+import { serverOffer} from '../types/index.js';
 
-export function createOffer(offerData: string): ServerOffer {
+export function createOffer(offerData: string): serverOffer {
   const [
     title,
     description,
-    postDate,
+    date,
     previewImage,
     price,
     categories,
-    user
+    author
   ] = offerData.replace('\n', '').split('\t');
 
   return {
     title,
     description,
     previewImage,
-    user,
-    postDate,
+    author,
+    date,
     price: Number.parseInt(price, 10),
     categories: categories.split(';')
       .map((name) => ({name})),

@@ -12,6 +12,7 @@ export class GenerateCommand implements Command {
   private async load(url: string) {
     try {
       this.initialData = await got.get(url).json();
+      console.log('initialData loaded !');
     } catch {
       throw new Error(`Can't load data from ${url}`);
     }
@@ -32,8 +33,8 @@ export class GenerateCommand implements Command {
 
   public async execute(...parameters: string[]): Promise<void> {
     const [count, filepath, url] = parameters;
-    const offerCount = Number.parseInt(count, 10);
-
+    const offerCount =  Number.parseInt(count, 10);
+    console.log('Will write in ', filepath, ' offerCount= ', offerCount);
     try {
       await this.load(url);
       await this.write(filepath, offerCount);
