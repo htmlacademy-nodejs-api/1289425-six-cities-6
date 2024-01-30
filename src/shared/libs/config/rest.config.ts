@@ -3,7 +3,7 @@ import { Config } from './config.interface.js';
 import { Logger } from '../logger/index.js';
 import { configRestSchema, RestSchema } from './rest.schema.js';
 import { inject} from 'inversify';
-import {Component} from "../../types/index.js";
+import {Component} from '../../types/index.js';
 
 export class RestConfig implements Config<RestSchema> {
   private readonly config: RestSchema;

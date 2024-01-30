@@ -1,7 +1,7 @@
 import { Logger } from '../shared/libs/logger/index.js';
 import {Config, RestSchema} from '../shared/libs/config/index.js';
-import {Component} from "../shared/types/index.js";
-import {inject} from "inversify";
+import {Component} from '../shared/types/index.js';
+import {inject} from 'inversify';
 
 export class RestApplication {
   constructor(
