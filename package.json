@@ -11,6 +11,7 @@
   "scripts": {
     "start": "npm run build && node ./dist/main.js",
     "start-rest": "npm run build && node ./dist/main.rest.js",
+    "start:dev": "npm run ts ./src/main.rest.ts | pino-pretty --colorize --translateTime SYS:standard",
     "build": "npm run clean && npm run compile",
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
@@ -33,7 +34,8 @@
     "ts-node": "10.9.1",
     "tslib": "2.6.2",
     "typescript": "5.2.2",
-    "json-server": "0.17.3"
+    "json-server": "0.17.3",
+    "pino-pretty": "10.2.0"
   },
   "type": "module",
   "engines": {
