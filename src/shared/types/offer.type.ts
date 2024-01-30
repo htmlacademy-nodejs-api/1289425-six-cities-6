@@ -14,9 +14,9 @@ export type Offer = {
   rooms: number;
   guests: number;
   price: number;
-  categories: Category[];//Удобства.
   author: string;
   numberOfComments: number,//Количество комментариев. Рассчитывается автоматически;
   coords: Coord;
+  categories: Category[];//Удобства.
 }
 

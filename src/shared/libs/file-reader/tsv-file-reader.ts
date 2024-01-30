@@ -23,7 +23,7 @@ export class TSVFileReader implements FileReader {
     return this.rawData
       .split('\n')
       .filter((row) => row.trim().length > 0)
-      .map((line) => line.split('\t'))
+      .map((line) => line.split('|'))
       .map(([
         title,
         description,
@@ -38,10 +38,11 @@ export class TSVFileReader implements FileReader {
         rooms,
         guests,
         price,
-        categories,
         author,
         numberOfComments,
-        coords]) => ({
+        coords,
+        categories
+      ]) => ({
         title,
         description,
         date,
@@ -55,14 +56,14 @@ export class TSVFileReader implements FileReader {
         rooms: Number.parseInt(rooms, 10),
         guests: Number.parseInt(guests, 10),
         price: Number.parseInt(price, 10),
-        categories: categories.split(';')
-          .map((name) => ({name})),
         author,
         numberOfComments: Number.parseInt(numberOfComments, 10),
         coords: {
           latitude: Number.parseFloat(coords.split(',')[0]),
           longitude: Number.parseFloat(coords.split(',')[1]),
         },
+        categories: categories.split(',')
+          .map((name) => ({name})),
 
       }));
   }

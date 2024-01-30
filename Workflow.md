@@ -57,6 +57,15 @@ npm run ts -- <Путь к модулю с ts-кодом>
 ```
 
 Пакет `ts-node` позволяет выполнить TS-код в Node.js без предварительной компиляции. Используется только на этапе разработки.
+Пакет 'tsx' изпользуется для выполнения TS-кода.
+
+В файле package.json прописаны отдельные команды для командной строки :
+
+"cli:version": "tsx ./src/main.cli.ts --version",
+
+"cli:help": "tsx ./src/main.cli.ts",
+
+"cli:import": "tsx ./src/main.cli.ts --import ./src/mock/offers.tsv"
 
 #### Запустить проект
 
