@@ -18,7 +18,7 @@
     "tsx": "tsx",
     "cli:version": "tsx ./src/main.cli.ts --version",
     "cli:help": "tsx ./src/main.cli.ts",
-    "cli:import": "tsx ./src/main.cli.ts --import ./src/mock/offers.tsv",
+    "cli:import": "tsx ./src/main.cli.ts --import ./src/mock/generate.tsv",
     "mock:server": "json-server ./src/mock/mock-server-data.json --port 3123",
     "cli:generate": "tsx ./src/main.cli.ts --generate 10 ./src/mock/generate.tsv http://localhost:3123/api"
   },

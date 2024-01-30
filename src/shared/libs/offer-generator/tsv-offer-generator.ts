@@ -30,6 +30,6 @@ export class TSVOfferGenerator implements OfferGenerator {
       title, description, createdDate,
       photo, price, categories,
       firstname
-    ].join('|');
+    ].join('\t');
   }
 }

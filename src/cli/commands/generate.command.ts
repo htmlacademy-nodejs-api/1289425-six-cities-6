@@ -6,7 +6,7 @@ import { getErrorMessage } from '../../shared/helpers/index.js';
 import { TSVFileWriter } from '../../shared/libs/file-writer/index.js';
 
 export class GenerateCommand implements Command {
-  // @ts-expect-error
+  // @ts-expect-error/ Моковые данные не могут быть пустыми
   private initialData: MockServerData;
 
   private async load(url: string) {
@@ -33,7 +33,7 @@ export class GenerateCommand implements Command {
 
   public async execute(...parameters: string[]): Promise<void> {
     const [count, filepath, url] = parameters;
-    const offerCount =  Number.parseInt(count, 10);
+    const offerCount = Number.parseInt(count, 10);
     console.log('Will write in ', filepath, ' offerCount= ', offerCount);
     try {
       await this.load(url);

@@ -1,4 +1,4 @@
-import {Category} from "./category.type.js";
+import {Category} from './category.type.js';
 
 export type serverOffer = {
   title:string,

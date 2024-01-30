@@ -1,5 +1,5 @@
-import {Location} from "./location.type.js";
-import {City} from "./city.type.js";
+import {Location} from './location.type.js';
+import {City} from './city.type.js';
 
 export type MockServerData = {
   titles: string[];
