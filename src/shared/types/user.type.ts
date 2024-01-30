@@ -1,7 +1,12 @@
 export type User = {
-  firstName:string,
+  name:string,
   email:string,
-  avatarPath:string,
+  avatarPath?:string,
   password:string,
   userType:string,
+}
+
+export enum userType {
+  basic = 'обычный',
+  pro = 'pro'
 }

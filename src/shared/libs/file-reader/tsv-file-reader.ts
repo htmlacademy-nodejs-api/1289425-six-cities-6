@@ -1,70 +1,36 @@
-import {FileReader} from './file-reader.interface.ts';
-import {readFileSync} from 'node:fs';
-import {Offer} from '../../types/index.ts';
-import {BooleanString} from '../../../const/boolean_string.js';
+import EventEmitter from 'node:events';
+import { createReadStream } from 'node:fs';
+import { FileReader } from './file-reader.interface.js';
 
-export class TSVFileReader implements FileReader {
-  private rawData = '';
+const CHUNK_SIZE = 16384; // 16KB
 
-  constructor(
-    private readonly filename: string
-  ) {
+export class TSVFileReader extends EventEmitter implements FileReader {
+  constructor(private readonly filename: string) {
+    super();
   }
 
-  public read(): void {
-    this.rawData = readFileSync(this.filename, {encoding: 'utf-8'});
-  }
+  public async read(): Promise<void> {
+    const readStream = createReadStream(this.filename, {
+      highWaterMark: CHUNK_SIZE,
+      encoding: 'utf-8',
+    });
 
-  public toArray(): Offer[] {
-    if (!this.rawData) {
-      throw new Error('File was not read');
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of readStream) {
+      remainingData += chunk.toString();
+
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
+
+        this.emit('line', completeRow);
+      }
     }
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((line) => line.split('|'))
-      .map(([
-        title,
-        description,
-        date,
-        town,
-        previewImage,
-        photos,
-        flagPremium,
-        flagFavourite,
-        rate,
-        typeOfHouse,
-        rooms,
-        guests,
-        price,
-        author,
-        numberOfComments,
-        coords,
-        categories
-      ]) => ({
-        title,
-        description,
-        date,
-        town,
-        previewImage,
-        photos: photos ? photos.split(',') : [],
-        flagPremium: flagPremium === BooleanString.TRUE,
-        flagFavourite: flagFavourite === BooleanString.TRUE,
-        rate: Number.parseInt(rate, 10),
-        typeOfHouse,
-        rooms: Number.parseInt(rooms, 10),
-        guests: Number.parseInt(guests, 10),
-        price: Number.parseInt(price, 10),
-        author,
-        numberOfComments: Number.parseInt(numberOfComments, 10),
-        coords: {
-          latitude: Number.parseFloat(coords.split(',')[0]),
-          longitude: Number.parseFloat(coords.split(',')[1]),
-        },
-        categories: categories.split(',')
-          .map((name) => ({name})),
-
-      }));
+    this.emit('end', importedRowCount);
   }
 }
