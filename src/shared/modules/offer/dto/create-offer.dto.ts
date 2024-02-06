@@ -1,6 +1,3 @@
-import {TypeOfHouse} from "../../../types/house.enum.js";
-import {Ref} from "@typegoose/typegoose";
-import {UserEntity} from "../../user/index.js";
 import {Location} from "../../../types/index.js";
 
 export class CreateOfferDto {
