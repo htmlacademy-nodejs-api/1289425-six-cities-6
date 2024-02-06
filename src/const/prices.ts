@@ -1,4 +1,4 @@
 export const Prices = {
-  MIN_PRICE : 500,
-  MAX_PRICE : 2000
+  MIN_PRICE : 100,
+  MAX_PRICE : 100000
 } as const;
