@@ -3,6 +3,7 @@ import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@type
 //import { CategoryEntity } from '../category/index.js';
 import { UserEntity } from '../user/index.js';
 import {TypeOfHouse} from "../../types/house.enum.js";
+import {Location} from "../../types/index.js";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface OfferEntity extends defaultClasses.Base {}
@@ -66,16 +67,11 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   @prop({default: 0})
   public commentCount!: number;
 
-  /* // Здесь будет категория  - удобства
-  @prop({
-    ref: CategoryEntity,
-    required: true,
-    default: [],
-    _id: false
-  })
-  public categories!: Ref<CategoryEntity>[];
-  */
+  @prop()
+  public location!: Location;
 
+  @prop()
+  public comfort!: string[];//Удобства.
 }
 
 export const OfferModel = getModelForClass(OfferEntity);

@@ -39,5 +39,5 @@ export type OfferDB = {
   userId: User;
   commentCount: number,//Количество комментариев. Рассчитывается автоматически;
   location: Location;
-  categories: Category[];//Удобства.
+  comfort: string[];//Удобства.
 }
