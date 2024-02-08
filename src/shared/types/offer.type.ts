@@ -1,11 +1,13 @@
 import {Category} from './category.type.js';
 import {Location} from './location.type.js';
-import {User} from "./user.type.js";
 
 export type Offer = {
   title: string;
   description: string;
-  date: string;
+  data:string;
+  numberOfComments: number,//Количество комментариев. Рассчитывается автоматически;
+  location: Location;
+  categories: Category[];//Удобства.e: string;
   city: string;
   previewImage: string,
   photos: string[];
@@ -17,9 +19,6 @@ export type Offer = {
   guests: number;
   price: number;
   author: string;
-  numberOfComments: number,//Количество комментариев. Рассчитывается автоматически;
-  location: Location;
-  categories: Category[];//Удобства.
 }
 
 export type OfferDB = {
@@ -36,7 +35,7 @@ export type OfferDB = {
   rooms: number;
   guests: number;
   price: number;
-  userId: User;
+  userId: number;
   commentCount: number,//Количество комментариев. Рассчитывается автоматически;
   location: Location;
   comfort: string[];//Удобства.
