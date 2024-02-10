@@ -1,10 +1,10 @@
 import { UserService } from './user-service.interface.js';
 import { DocumentType, types } from '@typegoose/typegoose';
 import {CreateUserDto, UserEntity} from './index.js';
-import pino from "pino";
+import pino from 'pino';
 import Logger = pino.Logger;
-import {inject, injectable} from "inversify";
-import {Component} from "../../types/index.js";
+import {inject, injectable} from 'inversify';
+import {Component} from '../../types/index.js';
 
 @injectable()
 export class DefaultUserService implements UserService {
@@ -22,6 +22,7 @@ export class DefaultUserService implements UserService {
 
     return result;
   }
+
   public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
     return this.userModel.findOne({email});
   }

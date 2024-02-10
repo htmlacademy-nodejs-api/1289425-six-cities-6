@@ -4,12 +4,12 @@ import { DatabaseClient } from './database-client.interface.js';
 import { Component } from '../../types/index.js';
 import { Logger } from '../logger/index.js';
 import { setTimeout } from 'node:timers/promises';
-import {BdRetry} from "../../../const/bd_retry.js";
+import {BdRetry} from '../../../const/bd_retry.js';
 
 
 @injectable()
 export class MongoDatabaseClient implements DatabaseClient {
-  // @ts-ignore
+  //@typescript-eslint/поле будет определено позднее
   private mongoose: typeof Mongoose;
   private isConnected: boolean;
 
@@ -31,7 +31,8 @@ export class MongoDatabaseClient implements DatabaseClient {
     this.logger.info('Trying to connect to MongoDB…');
 
     let attempt = 0;
-    this.isConnected = true;	    while (attempt < BdRetry.RETRY_COUNT) {
+    this.isConnected = true;
+    while (attempt < BdRetry.RETRY_COUNT) {
       try {
         this.mongoose = await Mongoose.connect(uri);
         this.isConnected = true;
@@ -45,7 +46,8 @@ export class MongoDatabaseClient implements DatabaseClient {
     }
 
 
-    this.logger.info('Database connection established.');	    throw new Error(`Unable to establish database connection after ${BdRetry.RETRY_COUNT}`);
+    this.logger.info('Database connection established.');
+    throw new Error(`Unable to establish database connection after ${BdRetry.RETRY_COUNT}`);
   }
 
   public async disconnect(): Promise<void> {

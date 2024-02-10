@@ -1,9 +1,7 @@
 import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
-//import { OfferDB } from '../../types/index.js';
-//import { CategoryEntity } from '../category/index.js';
 import { UserEntity } from '../user/index.js';
-import {TypeOfHouse} from "../../types/house.enum.js";
-import {Location} from "../../types/index.js";
+import {TypeOfHouse} from '../../types/house.enum.js';
+import {Location} from '../../types/index.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export interface OfferEntity extends defaultClasses.Base {}
@@ -32,16 +30,16 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public city!: string;
 
   @prop()
-  photos!: string[];
+    photos!: string[];
 
   @prop()
-  flagPremium!: boolean;
+    flagPremium!: boolean;
 
   @prop()
-  flagFavourite!: boolean;
+    flagFavourite!: boolean;
 
   @prop()
-  rate!: number;
+    rate!: number;
 
   @prop({
     type: () => String,
@@ -50,10 +48,10 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public typeOfHouse!: typeof TypeOfHouse;//??
 
   @prop()
-  rooms!: number;
+    rooms!: number;
 
   @prop()
-  guests!: number;
+    guests!: number;
 
   @prop()
   public price!: number;

@@ -1,4 +1,4 @@
-import {defaultClasses,  getModelForClass, prop, modelOptions} from '@typegoose/typegoose';
+import {defaultClasses, getModelForClass, prop, modelOptions} from '@typegoose/typegoose';
 import { User } from '../../types/index.js';
 import { createSHA256 } from '../../helpers/index.js';
 
@@ -14,7 +14,7 @@ export interface UserEntity extends defaultClasses.Base {}
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class UserEntity extends defaultClasses.TimeStamps implements User {
-  @prop({ required: true, default: '' })
+  @prop({ required: true, default: 'Mike' })
   public name: string;
 
   @prop({unique: true, required: true})
@@ -27,7 +27,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   public password!: string;
 
   @prop({ required: true })
-  public userType!: string
+  public userType!: string;
 
   constructor(userData: User) {
     super();

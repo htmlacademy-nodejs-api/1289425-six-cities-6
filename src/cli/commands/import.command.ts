@@ -9,7 +9,7 @@ import { Logger } from '../../shared/libs/logger/index.js';
 import { ConsoleLogger } from '../../shared/libs/logger/console.logger.js';
 import { DefaultUserService, UserModel } from '../../shared/modules/user/index.js';
 import { DEFAULT_DB_PORT, DEFAULT_USER_PASSWORD } from './command.constant.js';
-import {OfferDB} from "../../shared/types/index.js";
+import {OfferDB} from '../../shared/types/index.js';
 
 export class ImportCommand implements Command {
 
@@ -18,7 +18,7 @@ export class ImportCommand implements Command {
   private offerService: OfferService;
   private databaseClient: DatabaseClient;
   private logger: Logger;
-  // @ts-ignore
+  // @typescript-eslint//
   private salt: string;
 
   constructor() {
@@ -27,8 +27,8 @@ export class ImportCommand implements Command {
 
     this.logger = new ConsoleLogger();
     this.offerService = new DefaultOfferService(this.logger, OfferModel);
-    //this.categoryService = new DefaultCategoryService(this.logger, CategoryModel);
-    // @ts-ignore
+
+    // @typescript-eslint//
     this.userService = new DefaultUserService(this.logger, UserModel);
     this.databaseClient = new MongoDatabaseClient(this.logger);
   }
@@ -47,7 +47,7 @@ export class ImportCommand implements Command {
   private async saveOffer(offer: OfferDB) {
 
     const user = await this.userService.findOrCreate({
-      //@ts-ignore
+      //@typescript-eslint/поле всегда определено
       ...offer.userId,
       password: DEFAULT_USER_PASSWORD
     }, this.salt);

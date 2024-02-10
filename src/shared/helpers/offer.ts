@@ -19,7 +19,7 @@ export function createOffer(offerData: string): OfferDB {
     commentCount,
     location,
     comfort
-   ] = offerData.replace('\n', '').split('\t');
+  ] = offerData.replace('\n', '').split('\t');
 
   return {
     title,

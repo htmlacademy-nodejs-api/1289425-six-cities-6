@@ -1,4 +1,4 @@
-import {Location} from "../../../types/index.js";
+import {Location} from '../../../types/index.js';
 
 export class CreateOfferDto {
   public title!: string;
