@@ -10,14 +10,14 @@ import { ConsoleLogger } from '../../shared/libs/logger/console.logger.js';
 import { DefaultUserService, UserModel } from '../../shared/modules/user/index.js';
 import { DEFAULT_DB_PORT, DEFAULT_USER_PASSWORD } from './command.constant.js';
 import {OfferDB} from '../../shared/types/index.js';
+import {pino} from "pino";
 
 export class ImportCommand implements Command {
 
   private userService: UserService;
-  //private categoryService: CategoryService;
   private offerService: OfferService;
   private databaseClient: DatabaseClient;
-  private logger: Logger;
+  private readonly logger: Logger;
   private salt: string = '';
 
   constructor() {
@@ -28,7 +28,7 @@ export class ImportCommand implements Command {
     this.offerService = new DefaultOfferService(this.logger, OfferModel);
 
     // @typescript-eslint// часть типов будет потеряна
-    this.userService = new DefaultUserService(this.logger, UserModel);
+    this.userService = new DefaultUserService(<pino.Logger>this.logger, UserModel);
     this.databaseClient = new MongoDatabaseClient(this.logger);
   }
 
