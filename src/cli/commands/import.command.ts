@@ -27,7 +27,6 @@ export class ImportCommand implements Command {
     this.logger = new ConsoleLogger();
     this.offerService = new DefaultOfferService(this.logger, OfferModel);
 
-    // @typescript-eslint// часть типов будет потеряна
     this.userService = new DefaultUserService(<pino.Logger>this.logger, UserModel);
     this.databaseClient = new MongoDatabaseClient(this.logger);
   }
