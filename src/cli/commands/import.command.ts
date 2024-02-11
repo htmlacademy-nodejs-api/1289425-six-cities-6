@@ -18,8 +18,7 @@ export class ImportCommand implements Command {
   private offerService: OfferService;
   private databaseClient: DatabaseClient;
   private logger: Logger;
-  // @typescript-eslint//
-  private salt: string;
+  private salt: string = '';
 
   constructor() {
     this.onImportedLine = this.onImportedLine.bind(this);
@@ -28,7 +27,7 @@ export class ImportCommand implements Command {
     this.logger = new ConsoleLogger();
     this.offerService = new DefaultOfferService(this.logger, OfferModel);
 
-    // @typescript-eslint//
+    // @typescript-eslint// часть типов будет потеряна
     this.userService = new DefaultUserService(this.logger, UserModel);
     this.databaseClient = new MongoDatabaseClient(this.logger);
   }
@@ -47,13 +46,13 @@ export class ImportCommand implements Command {
   private async saveOffer(offer: OfferDB) {
 
     const user = await this.userService.findOrCreate({
+      email: '', name: '', userType: '',
       //@typescript-eslint/поле всегда определено
-      ...offer.userId,
+      ...offer,
       password: DEFAULT_USER_PASSWORD
     }, this.salt);
 
     await this.offerService.create({
-      //categories,
       userId: user.id,
       title: offer.title,
       description: offer.description,
