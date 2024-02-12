@@ -14,46 +14,46 @@ export interface OfferEntity extends defaultClasses.Base {}
 })
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 export class OfferEntity extends defaultClasses.TimeStamps {
-  @prop({ trim: true, required: true })
+  @prop({type:String, trim: true, required: true })
   public title!: string;
 
-  @prop({trim: true})
+  @prop({type:String, trim: true})
   public description!: string;
 
-  @prop()
+  @prop({type:String})
   public previewImage!: string;
 
-  @prop()
+  @prop({type:Date})
   public postDate!: Date;
 
-  @prop()
+  @prop({type:String})
   public city!: string;
 
-  @prop()
+  @prop({type:[String]})
     photos!: string[];
 
-  @prop()
+  @prop({type:Boolean})
     flagPremium!: boolean;
 
-  @prop()
+  @prop({type:Boolean})
     flagFavourite!: boolean;
 
-  @prop()
+  @prop({type:Number})
     rate!: number;
 
   @prop({
     type: () => String,
     enum:TypeOfHouse
   })
-  public typeOfHouse!: typeof TypeOfHouse;//??
+  public typeOfHouse!: typeof TypeOfHouse;
 
-  @prop()
+  @prop({type:Number})
     rooms!: number;
 
-  @prop()
+  @prop({type:Number})
     guests!: number;
 
-  @prop()
+  @prop({type:Number})
   public price!: number;
 
   @prop({
@@ -62,13 +62,13 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   })
   public userId!: Ref<UserEntity>;
 
-  @prop({default: 0})
+  @prop({type:Number,default: 0})
   public commentCount!: number;
 
-  @prop()
+  @prop({type:[String]})
   public location!: Location;
 
-  @prop()
+  @prop({type:[String]})
   public comfort!: string[];//Удобства.
 }
 
