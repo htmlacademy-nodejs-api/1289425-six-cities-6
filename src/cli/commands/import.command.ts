@@ -10,7 +10,7 @@ import { ConsoleLogger } from '../../shared/libs/logger/console.logger.js';
 import { DefaultUserService, UserModel } from '../../shared/modules/user/index.js';
 import { DEFAULT_DB_PORT, DEFAULT_USER_PASSWORD } from './command.constant.js';
 import {OfferDB} from '../../shared/types/index.js';
-import {pino} from "pino";
+import {pino} from 'pino';
 
 export class ImportCommand implements Command {
 
