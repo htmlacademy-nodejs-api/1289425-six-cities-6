@@ -453,7 +453,7 @@ components:
             - 'Breakfast',
             - 'Air conditioning',
 
-      comment:
+    comment:
         type: object
         properties:
           id:
@@ -480,7 +480,7 @@ components:
           date:
             type: string
             example: 2020-12-31T23:59:59.999Z
-      createComment:
+    createComment:
         type: object
         properties:
           rating:
@@ -489,6 +489,7 @@ components:
           comment:
             type: string
             example: Example
+
     createUser:
       type: object
 
