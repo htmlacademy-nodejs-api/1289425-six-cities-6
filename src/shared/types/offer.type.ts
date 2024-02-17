@@ -5,11 +5,11 @@ export type Offer = {
   title: string;
   description: string;
   data:string;
-  numberOfComments: number,//Количество комментариев. Рассчитывается автоматически;
+  numberOfComments: number;//Количество комментариев. Рассчитывается автоматически;
   location: Location;
   categories: Category[];//Удобства.e: string;
   city: string;
-  previewImage: string,
+  previewImage: string;
   photos: string[];
   flagPremium: boolean;
   flagFavourite: boolean;
@@ -24,7 +24,7 @@ export type Offer = {
 export type OfferDB = {
   title: string;
   description: string;
-  previewImage: string,
+  previewImage: string;
   postDate: Date;
   city: string;
   photos: string[];
@@ -36,7 +36,7 @@ export type OfferDB = {
   guests: number;
   price: number;
   userId: number;
-  commentCount: number,//Количество комментариев. Рассчитывается автоматически;
+  commentCount: number;//Количество комментариев. Рассчитывается автоматически;
   location: Location;
   comfort: string[];//Удобства.
 }
