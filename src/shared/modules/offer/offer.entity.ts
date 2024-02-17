@@ -30,16 +30,16 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public city!: string;
 
   @prop({type:[String]})
-  photos!: string[];
+    photos!: string[];
 
   @prop({type:Boolean})
-  flagPremium!: boolean;
+    flagPremium!: boolean;
 
   @prop({type:Boolean})
-  flagFavourite!: boolean;
+    flagFavourite!: boolean;
 
   @prop({type:Number})
-  rate!: number;
+    rate!: number;
 
   @prop({
     type: () => String,
@@ -48,10 +48,10 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public typeOfHouse!: typeof TypeOfHouse;
 
   @prop({type:Number})
-  rooms!: number;
+    rooms!: number;
 
   @prop({type:Number})
-  guests!: number;
+    guests!: number;
 
   @prop({type:Number})
   public price!: number;
