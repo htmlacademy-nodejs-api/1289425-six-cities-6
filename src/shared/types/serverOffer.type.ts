@@ -1,21 +1,11 @@
-import {Location} from './location.type.js';
+import {Category} from './category.type.js';
 
 export type serverOffer = {
-  title: string;
-  description: string;
-  previewImage: string;
-  postDate: Date;
-  city: string;
-  photos: string[];
-  flagPremium: boolean;
-  flagFavourite: boolean;
-  rate: number;
-  typeOfHouse: string;
-  rooms: number;
-  guests: number;
-  price: number;
-  userId: number;
-  commentCount: number;//Количество комментариев. Рассчитывается автоматически;
-  location: Location;
-  comfort: string[];//Удобства.
+  title:string,
+  description:string,
+  date:string,
+  previewImage:string,
+  price:number,
+  categories:Category[],
+  author:string
 }

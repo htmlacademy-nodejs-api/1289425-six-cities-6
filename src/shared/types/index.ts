@@ -6,4 +6,3 @@ export * from './location.type.js';
 export * from './serverOffer.type.js';
 export * from './mock-server-data.type.js';
 export * from './component.enum.js';
-export * from '../../const/sort-type.enum.js';
