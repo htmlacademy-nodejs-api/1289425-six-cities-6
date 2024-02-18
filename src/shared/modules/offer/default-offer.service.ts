@@ -89,7 +89,7 @@ export class DefaultOfferService implements OfferService {
   }
 
   public async updateCommentsCount(offerId:string): Promise<OfferEntity | void> {
-        const commentsCount = await this.offerModel
+    const commentsCount = await this.offerModel
       .aggregate([
         {
           $lookup: {

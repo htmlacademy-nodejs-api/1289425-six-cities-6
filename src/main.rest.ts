@@ -14,7 +14,7 @@ async function bootstrap() {
     createUserContainer(),
     createOfferContainer(),
     createCommentContainer()
-    );
+  );
 
   const application = appContainer.get<RestApplication>(Component.RestApplication);
   await application.init();
