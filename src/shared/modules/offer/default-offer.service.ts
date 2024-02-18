@@ -87,4 +87,21 @@ export class DefaultOfferService implements OfferService {
       .populate(['userId', 'categories'])
       .exec();
   }
+
+  public async updateCommentsCount(offerId:string): Promise<OfferEntity | void> {
+        const commentsCount = await this.offerModel
+      .aggregate([
+        {
+          $lookup: {
+            from: 'comments',
+            localField: 'offerId',
+            foreignField: 'id',
+            as: 'comments'
+          }
+        }
+      ])
+      .exec();
+
+    console.log('Comment count: ', commentsCount, ' for offerId: ', offerId);
+  }
 }
