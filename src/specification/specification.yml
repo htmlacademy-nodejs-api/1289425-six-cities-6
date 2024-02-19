@@ -1,0 +1,533 @@
+openapi: 3.1.0
+info:
+  title: API сервер для демо-проекта «Six-cities».
+  description: |-
+    * Список ресурсов и маршрутов сервера «Six-cities».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 2.0.0
+  tags:
+    - name: offers
+      description: Действия с объявлениями.
+    - name: users
+      description: Действия с пользователем.
+    - name: comments
+      description: Действия с комментариями.
+
+paths:
+  /offers:
+    get:
+      tags:
+        - offers
+      summary: Get offers list.
+      description: |-
+        * Get offers list.
+      operationId: getOffers
+      responses:
+        '200':
+          description: |-
+            * Offers list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/offer'
+        '400':
+          description: |-
+            * Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - offers
+      summary: Create a new offer.
+      description: |-
+        * Create a new offer.
+      operationId: createOffer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/offer'
+      responses:
+        '200':
+          description: |-
+            * Offer successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+        '400':
+          description: |-
+            * Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    /offers/{offerID}:
+      get:
+        tags:
+          - offers
+        summary: Get offer by ID.
+        description: |-
+          * Get offer by ID.
+        operationId: getOffer
+        parameters:
+          - name: offerID
+            in: path
+            required: true
+            description: |-
+              * Offer ID.
+            schema:
+              type: string
+        responses:
+          '200':
+            description: |-
+              * Offer successfully retrieved.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/offer'
+          '400':
+            description: |-
+              * Bad request.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+      put:
+        tags:
+          - offers
+        summary: Update offer by ID.
+        description: |-
+          * Update offer by ID.
+        operationId: updateOffer
+        parameters:
+          - name: offerID
+            in: path
+            required: true
+            description: |-
+              * Offer ID.
+            schema:
+              type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+        responses:
+          '200':
+            description: |-
+              * Offer successfully updated.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/offer'
+          '400':
+            description: |-
+              * Bad request.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+      delete:
+        tags:
+          - offers
+        summary: Delete offer by ID.
+        description: |-
+          * Delete offer by ID.
+        operationId: deleteOffer
+        parameters:
+          - name: offerID
+            in: path
+            required: true
+            description: |-
+              * Offer ID.
+            schema:
+              type: string
+        responses:
+          '200':
+            description: |-
+              * Offer successfully deleted.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/offer'
+          '400':
+            description: |-
+              * Bad request.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+  /users/register:
+    post:
+      tags:
+        - users
+      summary: Регистрация пользователя
+      description: Регистрирует нового пользователя.
+
+      requestBody:
+        description: Информация для создания нового пользователя.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUser'
+        required: true
+
+        responses:
+          "201":
+            description: Пользователь зарегистрирован. Объект пользователя.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/user'
+
+          "409":
+            description: Пользователь с таким email уже существует.
+
+  /users/login:
+    post:
+      tags:
+        - users
+      summary: Авторизация пользователя
+      description: Авторизует пользователя на основе логина и пароля
+
+    get:
+      tags:
+        - users
+      summary: Проверка состояния пользователя
+      description: Возвращает информацию по авторизованному пользователю
+
+  /users/{userId}/avatar:
+    post:
+      tags:
+        - users
+      summary: Загрузить изображение аватара
+      description: Загружает изображение аватара пользователя. Изображение
+        аватара должно быть в формате `png` или `jpg`.
+  /offers/{offerID}/comments:
+    get:
+      tags:
+        - comments
+      summary: Get reviews list by offer ID.
+      description: |-
+        * Get reviews list by offer ID.
+      operationId: getReviews
+      parameters:
+        - name: offerID
+          in: path
+          required: true
+          description: |-
+            * Offer ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |-
+            * Comments list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/comment'
+        '400':
+          description: |-
+            * Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - reviews
+      summary: Create a new review for the offer.
+      description: |-
+        * Create a new review for the offer.
+      operationId: createReview
+      parameters:
+        - name: offerID
+          in: path
+          required: true
+          description: |-
+            * Offer ID.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createComment'
+      responses:
+        '200':
+          description: |-
+            * Review successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/comment'
+        '400':
+          description: |-
+            * Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /offers/premium/{city}:
+    get:
+      tags:
+        - offers
+      summary: Get premium offers list by city.
+      description: |-
+        * Get premium offers list by city.
+      operationId: getPremiumOffers
+      parameters:
+        - name: city
+          in: path
+          required: true
+          description: |-
+            * City name.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |-
+            * Premium offers list successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/offer'
+        '400':
+          description: |-
+            * Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /offers/favorites:
+    get:
+      tags:
+        - offers
+      summary: Get favorite offers.
+      description: Get favorite offers.
+      operationId: getFavoriteOffers
+      responses:
+        '200':
+          description: Favorite offers successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - offers
+      summary: Add an offer to favorites.
+      description: Add an offer to favorites.
+      operationId: addFavoriteOffer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/offer'
+      responses:
+        '200':
+          description: Offer successfully added to favorites.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - offers
+      summary: Remove an offer from favorites.
+      description: Remove an offer from favorites.
+      operationId: removeFavoriteOffer
+      responses:
+        '200':
+          description: Offer successfully removed from favorites.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/offer'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    offer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6329c3d6a04ab1061c6425ea
+        title:
+          type: string
+          example: Example
+        description:
+          type: string
+          example: Example
+        previewImage:
+          type: string
+          example: https://example.com/image.jpg
+        postDate:
+          type: string
+          example: 2020-12-31T23:59:59.999Z
+        city:
+          type: string
+          example: Paris
+        photos:
+          type: array
+          items:
+            type: string
+          example:
+            - https://example.com/image1.jpg
+            - https://example.com/image2.jpg
+        flagPremium:
+          type: boolean
+          example: true
+        flagFavorite:
+          type: boolean
+          example: true
+        rate:
+          type: number
+          example: 4.5
+        typeOfHouse:
+          type: string
+          example: apartment
+        rooms:
+          type: number
+          example: 3
+        guests:
+          type: number
+          example: 5
+        price:
+          type: number
+          example: 100
+        userId:
+          type: number
+          example: 1
+        commentCount:
+          type: number
+          example: 100
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+              example: 48.85661
+            longitude:
+              type: number
+              example: 2.35222
+        comfort:
+          type: array
+          items:
+            type: string
+          example:
+            - 'Breakfast',
+            - 'Air conditioning',
+
+    comment:
+        type: object
+        properties:
+          id:
+            type: string
+            example: 6329c3d6a04ab1061c6425ea
+          user:
+            type: object
+            properties:
+              id:
+                type: string
+                example: 6329c3d6a04ab1061c6425ea
+              name:
+                type: string
+                example: Example
+              avatar:
+                type: string
+                example: https://example.com/avatar.jpg
+          rating:
+            type: number
+            example: 4.5
+          comment:
+            type: string
+            example: Example
+          date:
+            type: string
+            example: 2020-12-31T23:59:59.999Z
+    createComment:
+        type: object
+        properties:
+          rating:
+            type: number
+            example: 4.5
+          comment:
+            type: string
+            example: Example
+
+    createUser:
+      type: object
+
+      properties:
+        email:
+          type: string
+          example: keks@htmlacademy.ru
+
+        firstname:
+          type: string
+          example: Keks
+
+        lastname:
+          type: string
+          example: Cat
+
+        password:
+          type: string
+          example: 123456
+
+    user:
+      type: object
+
+      properties:
+        id:
+          type: string
+          example: 6329c3d6a04ab1061c6425ea
+
+        email:
+          type: string
+          example: keks@htmlacademy.ru
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: |-
+            * Error message.
+
+

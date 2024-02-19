@@ -10,7 +10,7 @@ import {BdRetry} from '../../../const/bd_retry.js';
 @injectable()
 export class MongoDatabaseClient implements DatabaseClient {
   //@typescript-eslint/поле будет определено позднее
-  private mongoose: typeof Mongoose;
+  private mongoose: typeof Mongoose | undefined;
   private isConnected: boolean;
 
   constructor(
@@ -55,7 +55,7 @@ export class MongoDatabaseClient implements DatabaseClient {
       throw new Error('Not connected to the database');
     }
 
-    await this.mongoose.disconnect?.();
+    await this.mongoose?.disconnect?.();
     this.isConnected = false;
     this.logger.info('Database connection closed.');
   }
