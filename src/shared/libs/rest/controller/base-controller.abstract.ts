@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { Response, Router } from 'express';
 import { Controller } from './controller.interface.js';
 import { Logger } from '../../logger/index.js';
-import { Route } from '../types/route.interface.js';
+import { Route } from '../route/route.interface.js';
 
 const DEFAULT_CONTENT_TYPE = 'application/json';
 
