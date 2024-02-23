@@ -12,6 +12,7 @@ export type RestSchema = {
   DB_PORT: string;
   DB_NAME: string;
   SERVER_HOST: string;
+  UPLOAD_DIRECTORY: string;
 }
 
 export const configRestSchema = convict<RestSchema>({
@@ -62,5 +63,11 @@ export const configRestSchema = convict<RestSchema>({
     format: String,
     default: 'http://localhost',
     env: 'SERVER_HOST',
+  },
+  UPLOAD_DIRECTORY: {
+    doc: 'Directory for upload files',
+    format: String,
+    env: 'UPLOAD_DIRECTORY',
+    default: null
   },
 });
