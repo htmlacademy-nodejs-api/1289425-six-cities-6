@@ -12,7 +12,9 @@ export class UserController extends BaseController {
     @inject(Component.Logger) protected readonly logger: PinoLogger,
     @inject(Component.UserService) private readonly DefaultUserService: UserService
   ) {
-    super(logger);
+    super(logger)
+
+    this.logger.info('Register routes for UserController…');
 
     this.addRoute({ path: '/', method: HttpMethod.Get, handler: this.checkStatus });
     this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.create });
@@ -20,8 +22,8 @@ export class UserController extends BaseController {
     this.addRoute({ path: '/logout', method: HttpMethod.Post, handler: this.logout });
   }
 
-  public create(req: Request, res: Response): void {
-    // Создание пользователя
+  public async create(_req: Request, _res: Response): Promise<void> {
+      throw new Error('[UserController] Oops');
   }
 
   public checkStatus(req: Request, res: Response): void {
