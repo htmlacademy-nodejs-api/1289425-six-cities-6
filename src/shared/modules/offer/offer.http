@@ -1,0 +1,28 @@
+## Список предложения
+GET http://localhost:4000/offers/ HTTP/1.1
+
+###
+
+## Детальная информация о конкретном предолжении
+GET http://localhost:4000/offers/1323 HTTP/1.1
+
+###
+
+## Получение списка комментариев для предложения
+GET http://localhost:4000/offers/6212/comments HTTP/1.1
+
+###
+
+
+## Получение списка премиальных предложений для города
+GET http://localhost:4000/offers/premium/Berlin HTTP/1.1
+
+###
+
+## Получение списка избранных предложений для пользователя
+GET http://localhost:4000/offers/favorites/213 HTTP/1.1
+
+###
+
+## Создание предолжения
+POST http://localhost:4000/offers/ HTTP/1.1

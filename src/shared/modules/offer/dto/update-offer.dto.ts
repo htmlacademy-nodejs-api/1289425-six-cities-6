@@ -2,6 +2,7 @@ import {Location} from '../../../types/index.js';
 
 
 export class UpdateOfferDto {
+  public offerId!: string;
   public title?: string;
   public description?: string;
   public previewImage?: string;
