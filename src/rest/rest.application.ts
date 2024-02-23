@@ -6,6 +6,7 @@ import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 import express, { Express } from 'express';
 import {UserController} from "../shared/modules/user/user.controller.js";
+import {ExceptionFilter} from "../shared/libs/rest/index.js";
 
 @injectable()
 export class RestApplication {
@@ -15,10 +16,14 @@ export class RestApplication {
   @inject(Component.Config) private readonly config: Config<RestSchema>,
   @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
   @inject(Component.UserController) private readonly userController: UserController,
+  @inject(Component.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
   ) {
     this.server = express();
   }
 
+  private async _initExceptionFilters() {
+    this.server.use(this.appExceptionFilter.catch.bind(this.appExceptionFilter));
+  }
   private async _initDb() {
     const mongoUri = getMongoURI(
       this.config.get('DB_USER'),
@@ -46,6 +51,10 @@ export class RestApplication {
   public async init() {
     this.logger.info('Application initialization');
     this.logger.info(`Get value from env $PORT: ${this.config.get('PORT')}`);
+
+    this.logger.info('Init exception filters');
+    await this._initExceptionFilters();
+    this.logger.info('Exception filters initialization compleated');
 
     this.logger.info('Init database…');
     await this._initDb();
