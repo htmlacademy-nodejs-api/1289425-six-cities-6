@@ -5,6 +5,7 @@ import {inject, injectable} from 'inversify';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 import express, { Express } from 'express';
+import {UserController} from "../shared/modules/user/user.controller.js";
 
 @injectable()
 export class RestApplication {
@@ -13,6 +14,7 @@ export class RestApplication {
   @inject(Component.Logger) private readonly logger: Logger,
   @inject(Component.Config) private readonly config: Config<RestSchema>,
   @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
+  @inject(Component.UserController) private readonly userController: UserController,
   ) {
     this.server = express();
   }
@@ -33,6 +35,13 @@ export class RestApplication {
     const port = this.config.get('PORT');
     this.server.listen(port);
   }
+  private async initControllers() {
+    this.server.use('/users', this.userController.router);
+  }
+
+  private async initMiddleware() {
+    this.server.use(express.json());
+  }
 
   public async init() {
     this.logger.info('Application initialization');
@@ -45,5 +54,14 @@ export class RestApplication {
     this.logger.info('Try to init server…');
     await this._initServer();
     this.logger.info(`🚀 Server started on http://localhost:${this.config.get('PORT')}`);
+
+    this.logger.info('Try to init Controllers…');
+    await this.initControllers();
+    this.logger.info(`Controllers init`);
+
+    this.logger.info('Try to init Middleware…');
+    await this.initMiddleware();
+    this.logger.info(`Middleware init`);
+
   }
 }
