@@ -4,12 +4,13 @@ import { UserService } from './user-service.interface.js';
 import {BaseController, HttpMethod} from '../../libs/rest/index.js';
 import {PinoLogger} from '../../libs/logger/index.js';
 import {Component} from '../../types/index.js';
-import {DefaultUserService} from './default-user.service.js';
+//import {DefaultUserService} from './default-user.service.js';
 
 @injectable()
 export class UserController extends BaseController {
   constructor(
     @inject(Component.Logger) protected readonly logger: PinoLogger,
+    //@ts-ignore
     @inject(Component.UserService) private readonly DefaultUserService: UserService
   ) {
     super(logger)
@@ -26,15 +27,15 @@ export class UserController extends BaseController {
       throw new Error('[UserController] Oops');
   }
 
-  public checkStatus(req: Request, res: Response): void {
+  public checkStatus(_req: Request, _res: Response): void {
     // Проверка статуса авторизации пользователя
   }
 
-  public login(req: Request, res: Response): void {
+  public login(_req: Request, _res: Response): void {
     // Авторизация пользователя
   }
 
-  public logout(req: Request, res: Response): void {
+  public logout(_req: Request, _res: Response): void {
     // Разавторизация пользователя
   }
 }
