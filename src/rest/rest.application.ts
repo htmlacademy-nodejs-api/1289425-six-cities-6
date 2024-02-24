@@ -5,7 +5,7 @@ import {inject, injectable} from 'inversify';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 import express, { Express } from 'express';
-import {UserController} from '../shared/modules/user/user.controller.js';
+import {UserController} from '../shared/modules/user/index.js';
 import {ExceptionFilter} from '../shared/libs/rest/index.js';
 
 @injectable()
