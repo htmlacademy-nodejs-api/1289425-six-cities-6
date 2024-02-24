@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import {City} from "../../../types/city.type.js";
+import {City} from '../../../types/city.type.js';
 
 export class OffersListItemRDO {
   @Expose() public name!: string;

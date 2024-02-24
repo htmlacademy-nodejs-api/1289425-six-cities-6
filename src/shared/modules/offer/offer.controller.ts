@@ -1,18 +1,18 @@
-import {inject, injectable} from "inversify";
-import {BaseController, HttpError, HttpMethod, RequestBody, RequestParams} from "../../libs/rest/index.js";
-import {Component} from "../../types/index.js";
-import {Logger} from "../../libs/logger/index.js";
-import {FoundOffer, OfferService} from "./offer-service.interface.js";
-import {CommentService} from "../comment/index.js";
-import {UserService} from "../user/user-service.interface.js";
-import {fillDTO} from "../../helpers/index.js";
-import {OffersListItemRDO} from "./rdo/offer-list-item.rdo.js";
-import {OfferRDO} from "./index.js";
+import {inject, injectable} from 'inversify';
+import {BaseController, HttpError, HttpMethod, RequestBody, RequestParams} from '../../libs/rest/index.js';
+import {Component} from '../../types/index.js';
+import {Logger} from '../../libs/logger/index.js';
+import {FoundOffer, OfferService} from './offer-service.interface.js';
+import {CommentService} from '../comment/index.js';
+import {UserService} from '../user/user-service.interface.js';
+import {fillDTO} from '../../helpers/index.js';
+import {OffersListItemRDO} from './rdo/offer-list-item.rdo.js';
+import {OfferRDO} from './index.js';
 import { Request, Response } from 'express';
-import {GetOfferDTO} from "./dto/get-offer.dto.js";
-import {UpdateOfferDto, CreateOfferDto, OfferDetailRDO} from "./index.js";
-import {StatusCodes} from "http-status-codes";
-import {City} from "../../types/city.type.js";
+import {GetOfferDTO} from './dto/get-offer.dto.js';
+import {UpdateOfferDto, CreateOfferDto, OfferDetailRDO} from './index.js';
+import {StatusCodes} from 'http-status-codes';
+import {City} from '../../types/city.type.js';
 
 type GetOfferRequest = Request<RequestParams, RequestBody, GetOfferDTO>
 type CreateOfferRequest = Request<RequestParams, RequestBody, CreateOfferDto>;

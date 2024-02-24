@@ -17,8 +17,8 @@ import { LoginUserRequest } from './login-user-request.type.js';
 import { fillDTO } from '../../helpers/index.js';
 import {Config} from 'convict';
 import {RestSchema} from '../../libs/config/index.js';
-import {UserRDO} from "./rdo/create-user.rdo.js";
-import {CheckUserStatusDTO} from "./dto/check-user-status.dto.js";
+import {UserRDO} from './rdo/create-user.rdo.js';
+import {CheckUserStatusDTO} from './dto/check-user-status.dto.js';
 
 type CheckStatusRequest = Request<RequestParams, RequestBody, CheckUserStatusDTO>
 
@@ -29,7 +29,7 @@ export class UserController extends BaseController {
     @inject(Component.UserService) private readonly userService: UserService,
     @inject(Component.Config) private readonly configService: Config<RestSchema>,
   ) {
-    super(logger)
+    super(logger);
 
     this.logger.info('Register routes for UserController…');
 
@@ -53,18 +53,18 @@ export class UserController extends BaseController {
   }
 
   public async create({ body }: CreateUserRequest,
-      res: Response,
+    res: Response,
   ): Promise<void> {
-      const existsUser = await this.userService.findByEmail(body.email);
-      if (existsUser) {
-        throw new HttpError(
-          StatusCodes.CONFLICT,
-          `User with email «${body.email}» exists.`,
-          'UserController'
-        );
-      }
-      const result = await this.userService.create(body, this.configService.get('SALT'));
-      this.created(res, fillDTO(UserRDO, result));
+    const existsUser = await this.userService.findByEmail(body.email);
+    if (existsUser) {
+      throw new HttpError(
+        StatusCodes.CONFLICT,
+        `User with email «${body.email}» exists.`,
+        'UserController'
+      );
+    }
+    const result = await this.userService.create(body, this.configService.get('SALT'));
+    this.created(res, fillDTO(UserRDO, result));
   }
 
   public async checkStatus({ body }: CheckStatusRequest, res: Response): Promise<void> {

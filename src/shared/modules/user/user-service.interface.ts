@@ -1,7 +1,7 @@
 import { DocumentType } from '@typegoose/typegoose';
 import { UserEntity } from './index.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
-import {UpdateUserDto} from './dto/update-user.dto.js'
+import {UpdateUserDto} from './dto/update-user.dto.js';
 import { FoundOffers } from '../offer/index.js';
 
 export type UserDoc = DocumentType<UserEntity>;

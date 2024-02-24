@@ -2,7 +2,7 @@ import { CreateOfferDto } from './dto/create-offer.dto.js';
 import { DocumentType } from '@typegoose/typegoose';
 import { OfferEntity } from './offer.entity.js';
 import {UpdateOfferDto} from './dto/update-offer.dto.js';
-import {City} from "../../types/city.type.js";
+import {City} from '../../types/city.type.js';
 
 export type OfferDoc = DocumentType<OfferEntity>;
 export type FoundOffer = Promise<OfferDoc | null>;

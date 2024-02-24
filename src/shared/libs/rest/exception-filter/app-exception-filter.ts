@@ -21,6 +21,7 @@ export class AppExceptionFilter implements ExceptionFilter {
       .status(error.httpStatusCode)
       .json(createErrorObject(error.message));
   }
+
   private handleOtherError(error: Error, _req: Request, res: Response, _next: NextFunction) {
     this.logger.error(error.message, error);
     res

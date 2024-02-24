@@ -5,8 +5,8 @@ import {inject, injectable} from 'inversify';
 import { DatabaseClient } from '../shared/libs/database-client/index.js';
 import { getMongoURI } from '../shared/helpers/index.js';
 import express, { Express } from 'express';
-import {UserController} from "../shared/modules/user/user.controller.js";
-import {ExceptionFilter} from "../shared/libs/rest/index.js";
+import {UserController} from '../shared/modules/user/user.controller.js';
+import {ExceptionFilter} from '../shared/libs/rest/index.js';
 
 @injectable()
 export class RestApplication {
@@ -24,6 +24,7 @@ export class RestApplication {
   private async _initExceptionFilters() {
     this.server.use(this.appExceptionFilter.catch.bind(this.appExceptionFilter));
   }
+
   private async _initDb() {
     const mongoUri = getMongoURI(
       this.config.get('DB_USER'),
@@ -40,6 +41,7 @@ export class RestApplication {
     const port = this.config.get('PORT');
     this.server.listen(port);
   }
+
   private async initControllers() {
     this.server.use('/users', this.userController.router);
   }
@@ -66,11 +68,11 @@ export class RestApplication {
 
     this.logger.info('Try to init Controllers…');
     await this.initControllers();
-    this.logger.info(`Controllers init`);
+    this.logger.info('Controllers init');
 
     this.logger.info('Try to init Middleware…');
     await this.initMiddleware();
-    this.logger.info(`Middleware init`);
+    this.logger.info('Middleware init');
 
   }
 }
