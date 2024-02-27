@@ -3,7 +3,7 @@ import {Route} from '../route/route.interface.js';
 
 export interface Controller {
   readonly router: Router;
-  addRouter(route: Route): void;
+  addRoute(route: Route): void;
 /*
   addRoute(route: {
     path: string;

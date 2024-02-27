@@ -2,7 +2,6 @@ import { CreateOfferDto } from './dto/create-offer.dto.js';
 import { DocumentType } from '@typegoose/typegoose';
 import { OfferEntity } from './offer.entity.js';
 import {UpdateOfferDto} from './dto/update-offer.dto.js';
-import {City} from '../../types/city.type.js';
 
 export type OfferDoc = DocumentType<OfferEntity>;
 export type FoundOffer = Promise<OfferDoc | null>;
@@ -19,5 +18,6 @@ export interface OfferService {
   findDiscussed(count: number): Promise<DocumentType<OfferEntity>[]>;
   exists(documentId: string): Promise<boolean>;
   updateCommentsCount(id: string): Promise<OfferEntity | void>
-  getPremiumByCity(cityName: City, offersCount?: number): FoundOffers;
+  getPremiumByCity(cityName: string, offersCount?: number): Promise<DocumentType<FoundOffers | null>>;
+  getFavoriteByUserId(userId: string): Promise<DocumentType<FoundOffers | null>>;
 }
