@@ -4,3 +4,8 @@ export * from './offer-service.interface.js';
 export * from './default-offer.service.js';
 export * from './offer.container.js';
 export * from '../../types/sort-type.enum.js';
+export * from './dto/get-offer.dto.js';
+export * from './dto/update-offer.dto.js';
+export * from './rdo/offer.rdo.js';
+export * from './rdo/offer-list-item.rdo.js';
+export * from './rdo/offer-detail.rdo.js';

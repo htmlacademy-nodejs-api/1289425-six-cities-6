@@ -11,6 +11,8 @@ export type RestSchema = {
   DB_PASSWORD: string;
   DB_PORT: string;
   DB_NAME: string;
+  SERVER_HOST: string;
+  UPLOAD_DIRECTORY: string;
 }
 
 export const configRestSchema = convict<RestSchema>({
@@ -55,5 +57,17 @@ export const configRestSchema = convict<RestSchema>({
     format: String,
     env: 'DB_NAME',
     default: 'six-cities_mongodb'
+  },
+  SERVER_HOST: {
+    doc: 'REST Servers host',
+    format: String,
+    default: 'http://localhost',
+    env: 'SERVER_HOST',
+  },
+  UPLOAD_DIRECTORY: {
+    doc: 'Directory for upload files',
+    format: String,
+    env: 'UPLOAD_DIRECTORY',
+    default: null
   },
 });

@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { OfferService } from './offer-service.interface.js';
+import { OfferService} from './offer-service.interface.js';
 import { Component } from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
 import { DocumentType, types } from '@typegoose/typegoose';
@@ -104,4 +104,6 @@ export class DefaultOfferService implements OfferService {
 
     console.log('Comment count: ', commentsCount, ' for offerId: ', offerId);
   }
+
+
 }
