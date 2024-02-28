@@ -2,7 +2,7 @@ import {inject, injectable} from 'inversify';
 import {
   BaseController, DocumentExistsMiddleware,
   HttpError,
-  HttpMethod,
+  HttpMethod, PrivateRouteMiddleware,
   RequestBody,
   RequestParams, ValidateDtoMiddleware,
   ValidateObjectIdMiddleware
@@ -39,7 +39,9 @@ export class OfferController extends BaseController {
     super(logger);
 
     this.addRoute({path: '/index', method: HttpMethod.Get, handler: this.index});
-    this.addRoute({path: '/create', method: HttpMethod.Post, handler: this.create});
+    this.addRoute({path: '/create', method: HttpMethod.Post, handler: this.create, middlewares: [new PrivateRouteMiddleware(),
+      new ValidateDtoMiddleware(CreateOfferDto)
+    ]});
     this.addRoute({path: '/favorites/:userId', method: HttpMethod.Get, handler: this.getFavorites,
       middlewares: [
         new ValidateObjectIdMiddleware('userId')
@@ -53,9 +55,10 @@ export class OfferController extends BaseController {
       ]
     });
     this.addRoute({path: '/update/:offerId', method: HttpMethod.Patch, handler: this.update, middlewares: [
-      new ValidateObjectIdMiddleware('offerId'), new ValidateDtoMiddleware(UpdateOfferDto), new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),]
+      new PrivateRouteMiddleware(),new ValidateObjectIdMiddleware('offerId'), new ValidateDtoMiddleware(UpdateOfferDto), new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),]
     });
     this.addRoute({path: '/delete/:offerId', method: HttpMethod.Delete, handler: this.delete, middlewares: [
+      new PrivateRouteMiddleware(),
       new ValidateObjectIdMiddleware('offerId'),
       new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),]
     });
