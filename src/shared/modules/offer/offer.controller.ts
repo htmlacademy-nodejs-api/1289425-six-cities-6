@@ -131,15 +131,24 @@ export class OfferController extends BaseController {
     this.ok(res, fillDTO(OfferRDO, offers));
   }
 
-  private async exists(offerId: string): FoundOffer {
-    const offer = await this.offerService.findById(offerId);
-    return offer;
-  }
-
   public async getComments({ params }: Request<ParamOfferId>, res: Response): Promise<void> {
 
     const comments = await this.commentService.findByOfferId(params.offerId);
     this.ok(res, fillDTO(CommentRdo, comments));
+  }
+
+  private async exists(offerId: string): FoundOffer {
+    const offer = await this.offerService.findById(offerId);
+
+    if(!offer) {
+      throw new HttpError(
+        StatusCodes.NOT_FOUND,
+        `Offer not found : ${offerId}`,
+        this.getControllerName()
+      );
+    }
+
+    return offer;
   }
 
 }
