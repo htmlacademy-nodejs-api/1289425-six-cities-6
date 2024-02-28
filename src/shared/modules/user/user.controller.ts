@@ -17,8 +17,8 @@ import { LoginUserRequest } from './login-user-request.type.js';
 import { fillDTO } from '../../helpers/index.js';
 import {Config} from 'convict';
 import {RestSchema} from '../../libs/config/index.js';
-import {UserRDO} from './rdo/create-user.rdo.js';
 import {CheckUserStatusDTO} from './dto/check-user-status.dto.js';
+import {UserRdo} from './rdo/create-user.rdo.js';
 
 type CheckStatusRequest = Request<RequestParams, RequestBody, CheckUserStatusDTO>
 
@@ -64,7 +64,7 @@ export class UserController extends BaseController {
       );
     }
     const result = await this.userService.create(body, this.configService.get('SALT'));
-    this.created(res, fillDTO(UserRDO, result));
+    this.created(res, fillDTO(UserRdo, result));
   }
 
   public async checkStatus({ body }: CheckStatusRequest, res: Response): Promise<void> {
@@ -76,7 +76,7 @@ export class UserController extends BaseController {
         this.getControllerName()
       );
     }
-    this.ok(res, fillDTO(UserRDO, user));
+    this.ok(res, fillDTO(UserRdo, user));
   }
 
   public async login(
