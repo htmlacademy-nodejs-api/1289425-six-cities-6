@@ -7,6 +7,7 @@ import { getMongoURI } from '../shared/helpers/index.js';
 import express, { Express } from 'express';
 import {UserController} from '../shared/modules/user/index.js';
 import {ExceptionFilter} from '../shared/libs/rest/index.js';
+import { ParseTokenMiddleware } from '../shared/libs/rest/middleware/parse-token.middleware.js';
 
 @injectable()
 export class RestApplication {
@@ -49,11 +50,14 @@ export class RestApplication {
   }
 
   private async initMiddleware() {
+    const authenticateMiddleware = new ParseTokenMiddleware(this.config.get('JWT_SECRET'));
+
     this.server.use(express.json());
     this.server.use(
       '/upload',
       express.static(this.config.get('UPLOAD_DIRECTORY'))
     );
+    this.server.use(authenticateMiddleware.execute.bind(authenticateMiddleware));
   }
 
   public async init() {
