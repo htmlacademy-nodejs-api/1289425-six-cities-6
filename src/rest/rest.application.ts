@@ -17,12 +17,14 @@ export class RestApplication {
   @inject(Component.DatabaseClient) private readonly databaseClient: DatabaseClient,
   @inject(Component.UserController) private readonly userController: UserController,
   @inject(Component.ExceptionFilter) private readonly appExceptionFilter: ExceptionFilter,
+    @inject(Component.AuthExceptionFilter) private readonly authExceptionFilter: ExceptionFilter,
   ) {
     this.server = express();
   }
 
   private async _initExceptionFilters() {
     this.server.use(this.appExceptionFilter.catch.bind(this.appExceptionFilter));
+    this.server.use(this.authExceptionFilter.catch.bind(this.authExceptionFilter));
   }
 
   private async _initDb() {

@@ -7,3 +7,4 @@ export * from './dto/check-user-status.dto.js';
 export * from './dto/create-user.messages.js';
 export * from './dto/login-user.dto.js';
 export * from './dto/login-user.messages.js';
+export * from './user-service.interface.js';
