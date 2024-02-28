@@ -1,6 +1,6 @@
 import {inject, injectable} from 'inversify';
 import {
-  BaseController,
+  BaseController,DocumentExistsMiddleware,
   HttpError,
   HttpMethod,
   RequestBody,
@@ -50,7 +50,11 @@ export class OfferController extends BaseController {
     });
     this.addRoute({path: '/delete/:offerId', method: HttpMethod.Delete, handler: this.delete, middlewares: [new ValidateObjectIdMiddleware('offerId')]
     });
-    this.addRoute({ path: '/:offerId/comments', method: HttpMethod.Get, handler: this.getComments,middlewares: [new ValidateObjectIdMiddleware('offerId')] });
+    this.addRoute({ path: '/:offerId/comments', method: HttpMethod.Get, handler: this.getComments,
+      middlewares: [new ValidateObjectIdMiddleware('offerId'),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+      ],
+    });
     this.logger.info('Offer Controller Init');
   }
 
