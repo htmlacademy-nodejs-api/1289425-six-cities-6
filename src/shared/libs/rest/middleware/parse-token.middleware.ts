@@ -33,7 +33,7 @@ export class ParseTokenMiddleware implements Middleware {
         req.tokenPayload = { ...payload };// ошибка - разбираюсь
         return next();
       } else {
-        throw new Error('Bad token');
+        new Error('Bad token');
       }
     } catch {
 
