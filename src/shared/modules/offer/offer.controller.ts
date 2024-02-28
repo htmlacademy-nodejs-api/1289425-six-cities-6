@@ -11,7 +11,7 @@ import {Component} from '../../types/index.js';
 import {Logger} from '../../libs/logger/index.js';
 import {FoundOffer, OfferService} from './offer-service.interface.js';
 import {CommentRdo, CommentService} from '../comment/index.js';
-import {UserService} from '../user/user-service.interface.js';
+import {UserService} from '../user/index.js';
 import {fillDTO} from '../../helpers/index.js';
 import {OffersListItemRDO} from './rdo/offer-list-item.rdo.js';
 import {OfferRDO} from './index.js';
@@ -87,8 +87,8 @@ export class OfferController extends BaseController {
     this.ok(res, fillDTO(OfferDetailRDO, offer));
   }
 
-  public async create({body}: CreateOfferRequest, res: Response): Promise<void> {
-    const offer = await this.offerService.create(body);
+  public async create({body, tokenPayload}: CreateOfferRequest, res: Response): Promise<void> {
+    const offer = await this.offerService.create({ ...body, userId: tokenPayload.id });
 
     this.created(res, fillDTO(OfferRDO, offer));
   }
