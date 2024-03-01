@@ -7,7 +7,7 @@ import { getMongoURI } from '../shared/helpers/index.js';
 import express, { Express } from 'express';
 import {UserController} from '../shared/modules/user/index.js';
 import {ExceptionFilter} from '../shared/libs/rest/index.js';
-import { ParseTokenMiddleware } from '../shared/libs/rest/index.js'
+import { ParseTokenMiddleware } from '../shared/libs/rest/index.js';
 import cors from 'cors';
 
 @injectable()
@@ -58,7 +58,7 @@ export class RestApplication {
       '/upload',
       express.static(this.config.get('UPLOAD_DIRECTORY'))
     );
-    this.server.use(authenticateMiddleware.execute.bind(authenticateMiddleware))
+    this.server.use(authenticateMiddleware.execute.bind(authenticateMiddleware));
     this.server.use(cors());
   }
 
