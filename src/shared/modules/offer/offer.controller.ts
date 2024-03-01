@@ -37,36 +37,50 @@ export class OfferController extends BaseController {
     @inject(Component.UserService) protected readonly userService: UserService,
   ) {
     super(logger);
-
-    this.addRoute({path: '/index', method: HttpMethod.Get, handler: this.index});
-    this.addRoute({path: '/create', method: HttpMethod.Post, handler: this.create, middlewares: [new PrivateRouteMiddleware(),
+    //show all Offers
+    this.addRoute({path: '/', method: HttpMethod.Get, handler: this.index});
+    //create Offer
+    this.addRoute({path: '/', method: HttpMethod.Post, handler: this.create, middlewares: [new PrivateRouteMiddleware(),
       new ValidateDtoMiddleware(CreateOfferDto)
     ]});
-    this.addRoute({path: '/favorites/:userId', method: HttpMethod.Get, handler: this.getFavorites,
-      middlewares: [
-        new ValidateObjectIdMiddleware('userId')
-      ]
-    });
-    this.addRoute({path: '/premium/:cityName', method: HttpMethod.Get, handler: this.getPremium});
-    this.addRoute({path: '/show/:offerId',
+    //get Offer by offerID
+    this.addRoute({path: '/:offerId',
       method: HttpMethod.Get, handler: this.show,
       middlewares: [new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
       ]
     });
+    //update Offer by offerID
     this.addRoute({path: '/update/:offerId', method: HttpMethod.Patch, handler: this.update, middlewares: [
       new PrivateRouteMiddleware(),new ValidateObjectIdMiddleware('offerId'), new ValidateDtoMiddleware(UpdateOfferDto), new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),]
     });
+    //delete Offer by offerID
     this.addRoute({path: '/delete/:offerId', method: HttpMethod.Delete, handler: this.delete, middlewares: [
       new PrivateRouteMiddleware(),
       new ValidateObjectIdMiddleware('offerId'),
       new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),]
     });
+    //Get Comments to the Offer by offerID
     this.addRoute({ path: '/:offerId/comments', method: HttpMethod.Get, handler: this.getComments,
       middlewares: [new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
       ],
     });
+    //Get Offers which are Favorite for this user
+    this.addRoute({path: '/favorites/:userId', method: HttpMethod.Get, handler: this.getFavorites,
+      middlewares: [
+        new ValidateObjectIdMiddleware('userId')
+      ]
+    });
+    //Mark Offer as Favorite for this user by OfferId
+    this.addRoute({path: '/favorites/:offerId', method: HttpMethod.Post, handler: this.setFavorites,
+      middlewares: [
+        new ValidateObjectIdMiddleware('offerId')
+      ]
+    });
+    //Get Premium Offers for this city
+    this.addRoute({path: '/premium/:cityName', method: HttpMethod.Get, handler: this.getPremium});
+
     this.logger.info('Offer Controller Init');
   }
 
@@ -117,6 +131,13 @@ export class OfferController extends BaseController {
     const offers = await this.userService.getFavoriteOffers(userId);
 
     this.ok(res, fillDTO(OfferRDO, offers));
+  }
+
+  public async setFavorites({body, params}: UpdateOfferRequest, res: Response): Promise<void> {
+    const {offerId} = params;
+    const updatedOffer = await this.offerService.updateById(offerId, body);
+
+    this.ok(res, fillDTO(OfferRDO, updatedOffer));
   }
 
   public async getPremium({ params }: GetPremiumOffers, res: Response): Promise<void> {
