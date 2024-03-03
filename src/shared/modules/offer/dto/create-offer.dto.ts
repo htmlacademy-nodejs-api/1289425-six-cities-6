@@ -3,7 +3,6 @@ import {
   ArrayMinSize,
   IsArray,
   IsBoolean, IsDateString, IsIn, IsInt,
-  IsMongoId,
   IsObject,
   IsString,
   IsUrl,
@@ -64,7 +63,6 @@ export class CreateOfferDto {
   @MaxLength(OfferProps.price.MAX, { message: CreateUpdateOfferMessages.price.MAX })
   public price!: number;
 
-  @IsMongoId({ message: CreateUpdateOfferMessages.userId.INVALID_ID })
   public userId!: string;
 
   @IsString({ message: CreateUpdateOfferMessages.number.invalidFormat })

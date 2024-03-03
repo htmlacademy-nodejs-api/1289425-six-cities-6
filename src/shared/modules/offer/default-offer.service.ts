@@ -1,16 +1,16 @@
 import { inject, injectable } from 'inversify';
-import { OfferService} from './offer-service.interface.js';
-import { Component } from '../../types/index.js';
+import {FoundOffers, OfferService} from './offer-service.interface.js';
+import {Component, DocumentExists} from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
 import { DocumentType, types } from '@typegoose/typegoose';
 import { OfferEntity } from './offer.entity.js';
 import { CreateOfferDto } from './dto/create-offer.dto.js';
-import {DEFAULT_OFFER_COUNT} from './offer.constant.js';
+import {DEFAULT_OFFER_COUNT, PREMIUM_OFFERS_COUNT} from './offer.constant.js';
 import {SortType} from '../../types/sort-type.enum.js';
 import {UpdateOfferDto} from './dto/update-offer.dto.js';
 
 @injectable()
-export class DefaultOfferService implements OfferService {
+export class DefaultOfferService implements OfferService, DocumentExists {
   constructor(
     @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.OfferModel) private readonly offerModel: types.ModelType<OfferEntity>
@@ -105,5 +105,17 @@ export class DefaultOfferService implements OfferService {
     console.log('Comment count: ', commentsCount, ' for offerId: ', offerId);
   }
 
+  public async getPremiumByCity(cityName: string, offersCount: number = PREMIUM_OFFERS_COUNT): Promise<DocumentType<FoundOffers | null>> {
+    return await this.offerModel
+      .find({ cityName })
+      .limit(offersCount)
+      .exec();
+  }
+
+  public async getFavoriteByUserId(userId: string): Promise<DocumentType<FoundOffers | null>>{
+    return await this.offerModel
+      .find({ userId })
+      .exec();
+  }
 
 }

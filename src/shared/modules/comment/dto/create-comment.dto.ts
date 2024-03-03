@@ -7,16 +7,14 @@ export class CreateCommentDto {
   @Length(5, 1024, { message: CreateCommentMessages.text.length })
   public text!: string;
 
-  @IsMongoId()
+  @IsMongoId({message: 'Invalid offerId'})
   public offerId!: string;
 
-  @IsMongoId()
   public userId!: string;
 
   @IsNumber()
   @Max(5, { message: CreateCommentMessages.rating.invalidFormat })
   @Min(1, { message: CreateCommentMessages.rating.invalidFormat })
-
   public rating!: number;
 
 }
