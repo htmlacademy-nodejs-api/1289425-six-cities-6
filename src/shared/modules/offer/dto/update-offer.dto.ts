@@ -1,23 +1,81 @@
 import {Location} from '../../../types/index.js';
+import {
+  ArrayMinSize, IsArray,
+  IsBoolean,
+  IsDateString,
+  IsIn,
+  IsInt, IsMongoId, IsObject,
+  IsString,
+  IsUrl,
+  Length,
+  MaxLength,
+  MinLength
+} from 'class-validator';
+import {CreateUpdateOfferMessages} from './create-update-offer.messages.js';
+import {cities1} from '../../../../const/cities.js';
+import {OfferProps} from '../offer.constant.js';
 
 
 export class UpdateOfferDto {
-  public offerId!: string;
-  public title?: string;
-  public description?: string;
-  public previewImage?: string;
-  public postDate?: Date;
-  public city?: string;
-  public photos?: string[];
-  public flagPremium?: boolean;
-  public flagFavourite?: boolean;
-  public rate?: number;
-  public typeOfHouse?: string;
-  public rooms?: number;
-  public guests?: number;
-  public price?: number;
-  public userId?: number;
-  public commentCount?: number;//Количество комментариев. Рассчитывается автоматически;
-  public location?: Location;
-  public comfort?: string[];
+  @IsString({ message: CreateUpdateOfferMessages.text.invalidFormat })
+  @Length(10, 100, { message: CreateUpdateOfferMessages.lengthShort.lengthField })
+  public title!: string;
+
+  @IsString({ message: CreateUpdateOfferMessages.description.invalidFormat })
+  @Length(20, 1024, { message: CreateUpdateOfferMessages.lengthLong.lengthField })
+  public description!: string;
+
+  @IsUrl({}, { message: CreateUpdateOfferMessages.image.invalidFormat })
+  public previewImage!: string;
+
+  @IsDateString({}, { message: CreateUpdateOfferMessages.date.INVALID })
+  public postDate!: string;
+
+  @IsString({ message: CreateUpdateOfferMessages.text.invalidFormat })
+  @IsIn(cities1, { message: CreateUpdateOfferMessages.city.Invalid })
+  public city!: string;
+
+  @ArrayMinSize(OfferProps.photos.MIN_COUNT, { message: CreateUpdateOfferMessages.photos.SIX_PHOTOS })
+  public photos!: string[];
+
+  @IsBoolean({ message: CreateUpdateOfferMessages.boolean.invalidFormat })
+  public flagPremium!: boolean;
+
+  @IsBoolean({ message: CreateUpdateOfferMessages.boolean.invalidFormat })
+  public flagFavourite!: boolean;
+
+  @IsInt({ message: CreateUpdateOfferMessages.number.invalidFormat })
+  @MinLength(OfferProps.rating.MIN, { message: CreateUpdateOfferMessages.rating.MIN })
+  @MaxLength(OfferProps.rating.MAX, { message: CreateUpdateOfferMessages.rating.MAX })
+  public rate!: number;
+
+  @IsString({ message: CreateUpdateOfferMessages.text.invalidFormat })
+  public typeOfHouse!: string;
+
+  @IsInt({ message: CreateUpdateOfferMessages.number.invalidFormat })
+  @MinLength(OfferProps.rooms.MIN, { message: CreateUpdateOfferMessages.rooms.MIN })
+  @MaxLength(OfferProps.rooms.MAX, { message: CreateUpdateOfferMessages.rooms.MAX })
+  public rooms!: number;
+
+  @IsInt({ message: CreateUpdateOfferMessages.number.invalidFormat })
+  @MinLength(OfferProps.guests.MIN, { message: CreateUpdateOfferMessages.guests.MIN })
+  @MaxLength(OfferProps.guests.MAX, { message: CreateUpdateOfferMessages.guests.MAX })
+  public guests!: number;
+
+  @IsInt({ message: CreateUpdateOfferMessages.number.invalidFormat })
+  @MinLength(OfferProps.price.MIN, { message: CreateUpdateOfferMessages.price.MIN })
+  @MaxLength(OfferProps.price.MAX, { message: CreateUpdateOfferMessages.price.MAX })
+  public price!: number;
+
+  @IsMongoId({ message: CreateUpdateOfferMessages.userId.INVALID_ID })
+  public userId!: string;
+
+  @IsString({ message: CreateUpdateOfferMessages.number.invalidFormat })
+  public commentCount!: number;
+
+  @IsObject({ message: CreateUpdateOfferMessages.location.invalidFormat })
+  public location!: Location;
+
+  @IsArray({ message: CreateUpdateOfferMessages.comfort.invalidFormat })
+  public comfort!: string[];//Удобства.
 }

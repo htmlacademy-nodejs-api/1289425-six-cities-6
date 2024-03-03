@@ -15,3 +15,17 @@ export const Cities:City[] = [
   {name:'Hamburg',locations:{latitude: 53.550341, longitude: 10.000654}},
   {name:'Dusseldorf',locations:{latitude: 51.225402, longitude: 6.776314}}
 ];
+
+export const Cities1 = {
+  Paris: 'Paris',
+  Cologne: 'Cologne',
+  Brussels: 'Brussels',
+  Amsterdam: 'Amsterdam',
+  Hamburg: 'Hamburg',
+  Dusseldorf: 'Dusseldorf',
+} as const;
+
+export type City1 = keyof typeof Cities1;
+
+export const cities1: City1[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
+
