@@ -46,7 +46,7 @@ export class DefaultOfferService implements OfferService, DocumentExists {
   public async updateById(offerId: string, dto: UpdateOfferDto): Promise<DocumentType<OfferEntity> | null> {
     return this.offerModel
       .findByIdAndUpdate(offerId, dto, {new: true})
-      .populate(['userId', 'categories'])
+      .populate(['userId'])
       .exec();
   }
 
@@ -54,7 +54,7 @@ export class DefaultOfferService implements OfferService, DocumentExists {
     const limit = count ?? DEFAULT_OFFER_COUNT;
     return this.offerModel
       .find({categories: categoryId}, {}, {limit})
-      .populate(['userId', 'categories'])
+      .populate(['userId'])
       .exec();
   }
 

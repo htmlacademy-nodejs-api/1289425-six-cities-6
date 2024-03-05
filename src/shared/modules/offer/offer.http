@@ -1,23 +1,23 @@
 ###
 
 ## Создание предолжения
-POST http://localhost:4000/offers/create HTTP/1.1
+POST http://localhost:4000/offers HTTP/1.1
 
 ###
 
-## Список предложения (index)
+## Список предложений
 
-GET http://localhost:4000/offers/index HTTP/1.1
+GET http://localhost:4000/offers HTTP/1.1
 
 ###
 
-## Детальная информация о конкретном предолжении (show по offerId)
-GET http://localhost:4000/offers/show/1323 HTTP/1.1
+## Детальная информация о конкретном предолжении (get (show)  по offerId)
+GET http://localhost:4000/offers/1323 HTTP/1.1
 
 ###
 
 ## Удаление информации о конкретном предолжении (delete по offerId)
-PATCH http://localhost:4000/offers/delete/1323 HTTP/1.1
+DELETE http://localhost:4000/offers/delete/1323 HTTP/1.1
 
 ###
 
@@ -28,7 +28,7 @@ PATCH http://localhost:4000/offers/update/1323 HTTP/1.1
 
 
 ## Получение списка премиальных предложений для города
-GET http://localhost:4000/offers/premium/Berlin HTTP/1.1
+GET http://localhost:4000/offers/premium/Paris HTTP/1.1
 
 ###
 

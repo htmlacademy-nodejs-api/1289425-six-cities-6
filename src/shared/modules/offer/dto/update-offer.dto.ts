@@ -2,7 +2,7 @@ import {Location} from '../../../types/index.js';
 import {
   ArrayMinSize, IsArray,
   IsBoolean,
-  IsDateString,
+  IsDateString, IsEnum,
   IsIn,
   IsInt, IsMongoId, IsObject,
   IsString,
@@ -14,6 +14,7 @@ import {
 import {CreateUpdateOfferMessages} from './create-update-offer.messages.js';
 import {cities1} from '../../../../const/cities.js';
 import {OfferProps} from '../offer.constant.js';
+import {TypeOfHouse1} from '../../../types/house.enum.js';
 
 
 export class UpdateOfferDto {
@@ -29,13 +30,14 @@ export class UpdateOfferDto {
   public previewImage!: string;
 
   @IsDateString({}, { message: CreateUpdateOfferMessages.date.INVALID })
-  public postDate!: string;
+  public postDate!: Date;
 
   @IsString({ message: CreateUpdateOfferMessages.text.invalidFormat })
   @IsIn(cities1, { message: CreateUpdateOfferMessages.city.Invalid })
   public city!: string;
 
   @ArrayMinSize(OfferProps.photos.MIN_COUNT, { message: CreateUpdateOfferMessages.photos.SIX_PHOTOS })
+  @IsArray({ message: CreateUpdateOfferMessages.photos.invalidFormat})
   public photos!: string[];
 
   @IsBoolean({ message: CreateUpdateOfferMessages.boolean.invalidFormat })
@@ -50,6 +52,7 @@ export class UpdateOfferDto {
   public rate!: number;
 
   @IsString({ message: CreateUpdateOfferMessages.text.invalidFormat })
+  @IsEnum(TypeOfHouse1, { message: CreateUpdateOfferMessages.text.invalidFormat })
   public typeOfHouse!: string;
 
   @IsInt({ message: CreateUpdateOfferMessages.number.invalidFormat })

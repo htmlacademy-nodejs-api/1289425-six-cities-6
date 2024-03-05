@@ -16,7 +16,7 @@ info:
       description: Действия с комментариями.
 
 paths:
-  /offers:
+  /offers/:
     get:
       tags:
         - offers
@@ -315,12 +315,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /offers/favorites:
+  /offers/favorites/{userId}:
     get:
       tags:
         - offers
       summary: Get favorite offers.
-      description: Get favorite offers.
+      description: Get favorite offers for this User.
       operationId: getFavoriteOffers
       responses:
         '200':
