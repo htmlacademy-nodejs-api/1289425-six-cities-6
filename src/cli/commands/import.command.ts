@@ -2,7 +2,7 @@ import { Command } from './command.interface.js';
 import { TSVFileReader } from '../../shared/libs/file-reader/index.js';
 import { createOffer, getErrorMessage, getMongoURI } from '../../shared/helpers/index.js';
 
-import { UserService } from '../../shared/modules/user/user-service.interface.js';
+import { UserService } from '../../shared/modules/user/index.js';
 import { DefaultOfferService, OfferModel, OfferService } from '../../shared/modules/offer/index.js';
 import { DatabaseClient, MongoDatabaseClient } from '../../shared/libs/database-client/index.js';
 import { Logger } from '../../shared/libs/logger/index.js';
@@ -45,7 +45,7 @@ export class ImportCommand implements Command {
   private async saveOffer(offer: OfferDB) {
 
     const user = await this.userService.findOrCreate({
-      email: '', name: '', userType: '',
+      email: '', name: '', userType: '', favoriteOffers: [],
       //@typescript-eslint/поле всегда определено
       ...offer,
       password: DEFAULT_USER_PASSWORD
