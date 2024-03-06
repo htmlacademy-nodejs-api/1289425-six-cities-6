@@ -49,4 +49,30 @@ export class DefaultUserService implements UserService {
 
     return user !== null;
   }
+
+  public async getFavoriteOffers(userId: string): Promise<string[] | null>{
+    const user = await this.userModel
+      .findById(userId)
+      .exec();
+
+    return user?.favoriteOffers ?? null;
+  }
+
+  public async addToFavorites(userId: string, offerId:string): Promise<DocumentType<UserEntity> | null>{
+    const user = await this.userModel.findById(userId);
+    const userFavorites: string[] = user?.favoriteOffers ?? [];
+
+    if(userFavorites.includes(offerId)) {
+      return null;
+    }
+
+    userFavorites.push(offerId);
+
+    return this.userModel
+      .findByIdAndUpdate(
+        userId,
+        {favoriteOffers: userFavorites},
+        {new: true}
+      );
+  }
 }

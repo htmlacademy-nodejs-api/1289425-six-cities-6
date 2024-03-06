@@ -1,5 +1,6 @@
-import { IsEmail, IsString, Length } from 'class-validator';
+import {IsArray, IsEmail, IsEnum, IsMongoId, IsString, Length} from 'class-validator';
 import { CreateUserMessages } from './create-user.messages.js';
+import {userType} from '../../../types/index.js';
 
 export class CreateUserDto {
   @IsEmail({}, { message: CreateUserMessages.email.invalidFormat })
@@ -10,7 +11,7 @@ export class CreateUserDto {
   public name!: string;
 
   @IsString({ message: CreateUserMessages.name.invalidFormat })
-  @Length(1, 15, { message: CreateUserMessages.name.lengthField })
+  @IsEnum(userType, { message: CreateUserMessages.name.invalidFormat })
   public userType!: string;
 
   @IsString({ message: CreateUserMessages.password.invalidFormat })
@@ -19,4 +20,8 @@ export class CreateUserDto {
 
   @IsString({ message: CreateUserMessages.name.invalidFormat })
   public avatarPath?: string;
+
+  @IsMongoId({ each: true })
+  @IsArray()
+  public favoriteOffers!: string[];
 }

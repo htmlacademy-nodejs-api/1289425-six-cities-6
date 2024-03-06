@@ -26,6 +26,8 @@ const userSchema = new Schema({
   },
   password:String,
   userType:String,
-}, { timestamps: true });
+  favoriteOffers: Array,//Array of offerId
+},
+{ timestamps: true });
 
 export const UserModel = model<UserDocument>('User', userSchema);

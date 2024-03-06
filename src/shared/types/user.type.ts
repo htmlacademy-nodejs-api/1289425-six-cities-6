@@ -4,6 +4,7 @@ export type User = {
   avatarPath?:string,
   password:string,
   userType:string,
+  favoriteOffers: string[]//Array of offerId
 }
 
 export enum userType {
