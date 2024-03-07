@@ -4,7 +4,7 @@ import { DatabaseClient } from './database-client.interface.js';
 import { Component } from '../../types/index.js';
 import { Logger } from '../logger/index.js';
 import { setTimeout } from 'node:timers/promises';
-import {BdRetry} from '../../../const/bd_retry.js';
+import {BdRetry} from '../../../const/bd-retry.js';
 
 
 @injectable()

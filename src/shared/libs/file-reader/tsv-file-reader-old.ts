@@ -1,7 +1,7 @@
 import {FileReader} from './file-reader.interface.ts';
 import {readFileSync} from 'node:fs';
 import {Offer} from '../../types/index.ts';
-import {BooleanString} from '../../../const/boolean_string.js';
+import {BooleanString} from '../../../const/boolean-string.js';
 
 export class TSVFileReader implements FileReader {
   private rawData = '';

@@ -15,11 +15,11 @@ import {TypeOfHouse1} from '../../../types/house.enum.js';
 
 export class CreateOfferDto {
   @IsString({ message: CreateUpdateOfferMessages.text.invalidFormat })
-  @Length(10, 100, { message: CreateUpdateOfferMessages.lengthShort.lengthField })
+  @Length(OfferProps.name.MIN_LENGTH, OfferProps.name.MAX_LENGTH, { message: CreateUpdateOfferMessages.lengthShort.lengthField })
   public title!: string;
 
   @IsString({ message: CreateUpdateOfferMessages.description.invalidFormat })
-  @Length(20, 1024, { message: CreateUpdateOfferMessages.lengthLong.lengthField })
+  @Length(OfferProps.description.MIN_LENGTH, OfferProps.description.MAX_LENGTH, { message: CreateUpdateOfferMessages.lengthLong.lengthField })
   public description!: string;
 
   @IsUrl({}, { message: CreateUpdateOfferMessages.image.invalidFormat })
