@@ -1,10 +1,11 @@
 import {IsMongoId, IsNumber, IsString, Length, Max, Min} from 'class-validator';
 import {CreateCommentMessages} from './create-comment.messages.js';
+import {CommentProps} from '../comment.constant.js';
 
 export class CreateCommentDto {
 
   @IsString({ message: CreateCommentMessages.text.invalidFormat })
-  @Length(5, 1024, { message: CreateCommentMessages.text.length })
+  @Length(CommentProps.text.MIN_LENGTH, CommentProps.text.MAX_LENGTH, { message: CreateCommentMessages.text.length })
   public text!: string;
 
   @IsMongoId({message: 'Invalid offerId'})
@@ -13,8 +14,8 @@ export class CreateCommentDto {
   public userId!: string;
 
   @IsNumber()
-  @Max(5, { message: CreateCommentMessages.rating.invalidFormat })
-  @Min(1, { message: CreateCommentMessages.rating.invalidFormat })
+  @Max(CommentProps.rating.MAX_LENGTH, {message: CreateCommentMessages.rating.invalidFormat })
+  @Min(CommentProps.rating.MIN_LENGTH, { message: CreateCommentMessages.rating.invalidFormat })
   public rating!: number;
 
 }

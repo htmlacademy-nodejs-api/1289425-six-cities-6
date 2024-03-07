@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { OfferGenerator } from './offer-generator.interface.js';
 import { MockServerData } from '../../types/index.js';
 import { generateRandomValue, getRandomItem, getRandomItems } from '../../helpers/index.js';
-import {WeekDays} from '../../../const/week_days.js';
+import {WeekDays} from '../../../const/week-days.js';
 import {Prices} from '../../../const/prices.js';
 
 export class TSVOfferGenerator implements OfferGenerator {
